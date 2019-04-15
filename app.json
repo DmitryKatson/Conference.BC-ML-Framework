@@ -1,0 +1,26 @@
+{
+  "id": "94ebd044-c9c5-452f-99b8-b9f57b9ef9b4",
+  "name": "BC-ML-Framework",
+  "publisher": "Dmitry Katson",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "14.0.0.0",
+  "application": "14.0.0.0",
+  "idRanges": [
+    {
+      "from": 50100,
+      "to": 50149
+    }
+  ],
+  "contextSensitiveHelpUrl": "https://BC-ML-Framework.com/help/",
+  "showMyCode": true,
+  "runtime": "3.0"
+}
