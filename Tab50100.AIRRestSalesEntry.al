@@ -40,6 +40,10 @@ table 50100 "AIR RestSalesEntry"
         {
             CaptionML = ENU = 'Music_Event';
         }
+        field(10; "fest_name"; Text[250])
+        {
+            CaptionML = ENU = 'fest_name';
+        }
 
     }
 

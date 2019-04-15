@@ -53,6 +53,10 @@ page 50100 "AIR RestSalesEntries"
                 {
                     ApplicationArea = All;
                 }
+                field("fest_name"; "fest_name")
+                {
+                    ApplicationArea = All;
+                }
 
             }
         }

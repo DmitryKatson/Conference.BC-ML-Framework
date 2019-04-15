@@ -62,6 +62,7 @@ codeunit 50100 "AIR RefreshRestSales"
         restsales."max_stock_quantity" := GetJsonToken(JsonObject, 'max_stock_quantity').AsValue.AsInteger;
         restsales."Children_Event" := YesNo2Boolean(GetJsonToken(JsonObject, 'Children_Event').AsValue.AsText());
         restsales."Music_Event" := YesNo2Boolean(GetJsonToken(JsonObject, 'Music_Event').AsValue.AsText());
+        restsales."fest_name" := jsonWithNull2Text(GetJsonToken(JsonObject, 'fest_name').AsValue());
 
         restsales.Insert;
     end;
@@ -87,6 +88,14 @@ codeunit 50100 "AIR RefreshRestSales"
                 exit(false);
         end;
 
+    end;
+
+    local procedure jsonWithNull2Text(someJsonValue: JsonValue): Text
+    begin
+        if someJsonValue.IsNull then
+            exit('')
+        else
+            exit(someJsonValue.AsText());
     end;
 
 }
