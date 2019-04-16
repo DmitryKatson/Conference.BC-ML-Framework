@@ -48,8 +48,7 @@ codeunit 50102 "AIR Rest. Load Demo Data"
     var
         Item: Record Item;
     begin
-        if isMenuItemAlreadyEsist(ExternalID) then
-            exit;
+        DeleteItemIfAlreadyEsist(ExternalID);
 
         with Item do begin
             Init();
@@ -62,30 +61,28 @@ codeunit 50102 "AIR Rest. Load Demo Data"
             Validate("Base Unit of Measure", 'Pack');
             Validate("Gen. Prod. Posting Group", 'RETAIL');
             Validate("Inventory Posting Group", 'RESALE');
+            UploadItemPicture(Item);
+
             Modify(true);
         end;
 
-        UploadItemPicture(Item."No.");
     end;
 
-    local procedure isMenuItemAlreadyEsist(ExternalID: Code[20]): Boolean
+    local procedure DeleteItemIfAlreadyEsist(ExternalID: Code[20]);
     var
         Item: Record Item;
     begin
         Item.SetRange("No. 2", ExternalID);
-        exit(not Item.IsEmpty())
+        Item.DeleteAll(true);
     end;
 
-    local procedure UploadItemPicture(ItemNo: code[20])
+    local procedure UploadItemPicture(var Item: Record Item)
     var
         PictureURL: Text;
         Client: HttpClient;
         Response: HttpResponseMessage;
         InStr: InStream;
-        Item: Record Item;
     begin
-        Item.get(ItemNo);
-
         PictureURL := GetItemPictureUrl(Item."No. 2");
         If Not Client.Get(PictureURL, Response) then
             exit;
@@ -93,7 +90,6 @@ codeunit 50102 "AIR Rest. Load Demo Data"
         Response.Content().ReadAs(InStr);
 
         Item.Picture.ImportStream(InStr, Item.Description);
-        Item.Modify();
     end;
 
     local procedure GetItemPictureUrl(ItemNo: Code[20]): Text

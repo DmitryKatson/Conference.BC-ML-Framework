@@ -36,12 +36,12 @@ codeunit 50101 "AIR Calculate Rest. Forecast"
 
     local procedure getMLUri(): Text
     begin
-        exit('<<INSERT URI HERE>>')
+        exit('https://europewest.services.azureml.net/workspaces/9d1ba609dfba49d580b7d65a379aaa64/services/4cfedcaed2de492c9160c2c38104c358/execute?api-version=2.0&details=true')
     end;
 
     local procedure getMLKey(): Text
     begin
-        exit('<<INSERT KEY HERE>>')
+        exit('eFp5IY7xyMfA99ta1Q3Eqyb/UgigT8U+lZTJfqJcmO2zAvEZLtvG2IylY+Atp1/Fr67pnIwXhFOlafafo6hmzA==')
     end;
 
 }

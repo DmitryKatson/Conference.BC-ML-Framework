@@ -3,6 +3,7 @@ page 50101 "AIR RestForecast"
     PageType = List;
     UsageCategory = Lists;
     ApplicationArea = All;
+    Editable = false;
     SourceTable = "Time Series Forecast";
 
     layout

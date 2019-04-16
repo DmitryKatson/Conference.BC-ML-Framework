@@ -26,6 +26,21 @@ pageextension 50100 "AIR MenuForecastItemCard" extends "Item Card" //30
                         RestForecastCalculate.CalculateRestForecast(Rec."No. 2");
                     end;
                 }
+
+                action("AIR OpenRestHistory")
+                {
+                    Caption = 'Open Rest. History';
+                    Image = History;
+                    ApplicationArea = All;
+                    trigger OnAction()
+                    var
+                        RestSalesHistory: Record "AIR RestSalesEntry";
+                    begin
+                        RestSalesHistory.SetRange(menu_item_id, "No. 2");
+                        Page.Run(page::"AIR RestSalesEntries", RestSalesHistory);
+                    end;
+                }
+
             }
 
         }
