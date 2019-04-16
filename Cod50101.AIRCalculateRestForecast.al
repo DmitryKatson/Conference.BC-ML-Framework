@@ -7,6 +7,8 @@ codeunit 50101 "AIR Calculate Rest. Forecast"
         RestSalesEntry: Record "AIR RestSalesEntry";
         Date: Record Date;
         TempTimeSeriesForecast: Record "Time Series Forecast" temporary;
+        TempTimeSeriesBuffer: Record "Time Series Buffer" temporary;
+        TimeSeriesModel: Option ARIMA,ETS,STL,"ETS+ARIMA","ETS+STL",ALL;
     begin
 
         //Setup Connection
@@ -21,11 +23,16 @@ codeunit 50101 "AIR Calculate Rest. Forecast"
                                 RestSalesEntry.FieldNo(date),
                                 RestSalesEntry.FieldNo(orders),
                                 Date."Period Type"::Date,
-                                WorkDate(),
-                                7);
+                                WorkDate(),  //from which date we want to forecast
+                                RestSalesEntry.Count);  //number of history periods
+
+        //Get Prepared data and delete empty lines
+        TimeSeriesMgt.GetPreparedData(TempTimeSeriesBuffer);
+        TempTimeSeriesBuffer.SetRange(Value, 0);
+        TempTimeSeriesBuffer.DeleteAll();
 
         //Setup Forecast 
-        TimeSeriesMgt.Forecast(1, 0, 0);
+        TimeSeriesMgt.Forecast(7, 0, TimeSeriesModel::ALL);
 
         //Get Forecast
         TimeSeriesMgt.GetForecast(TempTimeSeriesForecast);

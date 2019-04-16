@@ -62,4 +62,5 @@ table 50100 "AIR RestSalesEntry"
         Refreshrestsales.Refresh();
     end;
 
+
 }
