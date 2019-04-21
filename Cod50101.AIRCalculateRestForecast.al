@@ -31,7 +31,7 @@ codeunit 50101 "AIR Calculate Rest. Forecast"
         TempTimeSeriesBuffer.SetRange(Value, 0);
         TempTimeSeriesBuffer.DeleteAll();
 
-        //Setup Forecast 
+        //Calculate Forecast 
         TimeSeriesMgt.Forecast(7, 0, TimeSeriesModel::ALL);
 
         //Get Forecast
