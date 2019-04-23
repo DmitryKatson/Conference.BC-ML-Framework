@@ -10,7 +10,7 @@
             "authentication": "UserPassword",
             "breakOnError": true,
             "launchBrowser": true,
-            "startupObjectId": 50100,
+            "startupObjectId": 31,
             "startupObjectType": "Page",
             "schemaUpdateMode": "ForceSync"
         }

@@ -13,7 +13,6 @@ codeunit 50110 "AIR RestForecast Install"
             exit;
 
         LoadDemoData();
-        LoadRestHistory();
     end;
 
     local procedure EnableWebServicesCallsInTheSandbox()
@@ -47,14 +46,4 @@ codeunit 50110 "AIR RestForecast Install"
         MFLoadDemoData.LoadDemoData();
     end;
 
-    local procedure LoadRestHistory()
-    var
-        Refreshrestsales: Codeunit "AIR RefreshRestSales";
-        RestSalesEntry: Record "AIR RestSalesEntry";
-    begin
-        if Not RestSalesEntry.IsEmpty then
-            exit;
-
-        Refreshrestsales.Refresh();
-    end;
 }

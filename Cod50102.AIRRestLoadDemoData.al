@@ -42,6 +42,15 @@ codeunit 50102 "AIR Rest. Load Demo Data"
         InsertMenuItem('3 ', 'Boiled potatoes', false, 172, false);
         InsertMenuItem('2 ', 'Boiled eggs', false, 113, false);
         InsertMenuItem('17', 'Orange marmalade', false, 70, false);
+
+        DeleteAllEvents();
+
+        InsertEvent(CalcDate('<3D>', WorkDate()), 1, '');
+        InsertEvent(CalcDate('<2D>', WorkDate()), 2, '');
+        InsertEvent(CalcDate('<5D>', WorkDate()), 3, 'City Lights');
+        InsertEvent(CalcDate('<6D>', WorkDate()), 3, 'The V Festival');
+        InsertEvent(CalcDate('<7D>', WorkDate()), 3, 'Wirless Festival');
+        InsertEvent(CalcDate('<7D>', WorkDate()), 2, '');
     end;
 
     local procedure InsertMenuItem(ExternalID: Code[20]; Name: Text[250]; IsChildrenMenu: Boolean; MaxQtyOnStock: Decimal; PostDemoEntries: Boolean)
@@ -61,6 +70,9 @@ codeunit 50102 "AIR Rest. Load Demo Data"
             Validate("Base Unit of Measure", 'Pack');
             Validate("Gen. Prod. Posting Group", 'RETAIL');
             Validate("Inventory Posting Group", 'RESALE');
+
+            Validate("AIR Is Children Menu", IsChildrenMenu);
+
             UploadItemPicture(Item);
 
             Modify(true);
@@ -166,6 +178,26 @@ codeunit 50102 "AIR Rest. Load Demo Data"
             '34':
                 exit('http://www.misskitchenwitch.com/blog/wp-content/uploads/2013/08/RicePudding1.jpg');
         End;
+    end;
+
+    local procedure DeleteAllEvents()
+    var
+        MFEvents: Record "AIR MF Event Schedule";
+    begin
+        MFEvents.DeleteAll(true);
+    end;
+
+    local procedure InsertEvent(EventDate: Date; EventType: Integer; EventName: Text[50])
+    var
+        MFEvents: Record "AIR MF Event Schedule";
+    begin
+        with MFEvents do begin
+            Init();
+            "Event Date" := EventDate;
+            "Event Type" := EventType;
+            "Event Name" := EventName;
+            Insert();
+        end;
     end;
 
 }
