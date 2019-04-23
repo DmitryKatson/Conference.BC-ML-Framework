@@ -118,6 +118,7 @@ codeunit 50101 "AIR Calculate Rest. Forecast"
         with TempTimeSeriesForecast do begin
             Init();
             "Group ID" := ItemNo;
+            "Period No." := Count + 1;
             "Period Start Date" := ForecastDate;
             Value := PredictionValue;
             Insert();
