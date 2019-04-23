@@ -5,6 +5,7 @@ codeunit 50101 "AIR Calculate Rest. Forecast"
     var
         Date: Record Date;
         ForecastStartDate: Date;
+        RowNo: Integer;
 
         AzureMLConnector: Codeunit "Azure ML Connector";
         PredictionOrders: Text;
@@ -31,9 +32,6 @@ codeunit 50101 "AIR Calculate Rest. Forecast"
         AzureMLConnector.AddInputColumnName('max_stock_quantity');
         //repeat the same for all columns in the API input schema
 
-        //indicate that you are going to input values 
-        AzureMLConnector.AddInputRow();
-
         //Specify forecast start date
         ForecastStartDate := WorkDate();
 
@@ -42,6 +40,9 @@ codeunit 50101 "AIR Calculate Rest. Forecast"
         Date.SetRange("Period Start", ForecastStartDate, CalcDate('<7D>', ForecastStartDate));
         if Date.FindSet() then
             repeat
+                //indicate that you are going to input values 
+                AzureMLConnector.AddInputRow();
+                RowNo += 1;
 
                 //Add input values
                 AzureMLConnector.AddInputValue(Format(Date."Period Start"));
@@ -58,7 +59,7 @@ codeunit 50101 "AIR Calculate Rest. Forecast"
                 AzureMLConnector.SendToAzureML();
 
                 //Get forecast
-                AzureMLConnector.GetOutput(1, 1, PredictionOrders); //change AML output schema, if needed
+                AzureMLConnector.GetOutput(RowNo, 1, PredictionOrders); //change AML output schema, if needed
 
                 //Save forecast
                 Evaluate(PredictionValue, PredictionOrders);
