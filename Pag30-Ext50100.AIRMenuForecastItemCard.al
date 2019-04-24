@@ -39,4 +39,10 @@ pageextension 50100 "AIR MenuForecastItemCard" extends "Item Card" //30
         }
     }
 
+    trigger OnOpenPage()
+    begin
+        WorkDate(Today())
+    end;
+
+
 }
