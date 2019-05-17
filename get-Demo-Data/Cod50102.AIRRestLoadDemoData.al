@@ -85,6 +85,12 @@ codeunit 50102 "AIR Rest. Load Demo Data"
         Item: Record Item;
     begin
         Item.SetRange("No. 2", ExternalID);
+        if not Item.FindFirst() then
+            exit;
+
+        If item.ExistsItemLedgerEntry() then
+            exit;
+
         Item.DeleteAll(true);
     end;
 
