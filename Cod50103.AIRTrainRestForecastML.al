@@ -1,7 +1,7 @@
 codeunit 50103 "AIR Train Rest. Forecast ML"
 {
 
-    procedure Train()
+    procedure Train();
     var
         MLPrediction: Codeunit "ML Prediction Management";
         MyModel: Text;
@@ -18,7 +18,8 @@ codeunit 50103 "AIR Train Rest. Forecast ML"
         MLPrediction.SetRecord(RestSalesHistory);
 
         //Set features
-        MLPrediction.AddFeature(RestSalesHistory.FieldNo(date));
+        MLPrediction.AddFeature(RestSalesHistory.FieldNo(month));
+        MLPrediction.AddFeature(RestSalesHistory.FieldNo(day));
         MLPrediction.AddFeature(RestSalesHistory.FieldNo(stock_count));
         MLPrediction.AddFeature(RestSalesHistory.FieldNo(menu_item_id));
         MLPrediction.AddFeature(RestSalesHistory.FieldNo(in_children_menu));

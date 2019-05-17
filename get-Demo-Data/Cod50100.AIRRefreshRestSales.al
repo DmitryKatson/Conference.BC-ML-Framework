@@ -64,6 +64,9 @@ codeunit 50100 "AIR RefreshRestSales"
         restsales."Music_Event" := YesNo2Boolean(GetJsonToken(JsonObject, 'Music_Event').AsValue.AsText());
         restsales."fest_name" := jsonWithNull2Text(GetJsonToken(JsonObject, 'fest_name').AsValue());
 
+        restsales.month := Date2DMY(restsales.date, 2);
+        restsales.day := Date2DMY(restsales.date, 1);
+
         restsales.Insert;
     end;
 
@@ -93,7 +96,7 @@ codeunit 50100 "AIR RefreshRestSales"
     local procedure jsonWithNull2Text(someJsonValue: JsonValue): Text
     begin
         if someJsonValue.IsNull then
-            exit('')
+            exit('NA')
         else
             exit(someJsonValue.AsText());
     end;

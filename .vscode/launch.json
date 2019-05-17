@@ -5,12 +5,13 @@
             "type": "al",
             "request": "launch",
             "name": "Your own server",
-            "server": "http://BCLatestUS",
+            "server": "http://dok-us",
+            "tenant": "default",
             "serverInstance": "NAV",
             "authentication": "UserPassword",
             "breakOnError": true,
             "launchBrowser": true,
-            "startupObjectId": 50100,
+            "startupObjectId": 31,
             "startupObjectType": "Page",
             "schemaUpdateMode": "ForceSync"
         }

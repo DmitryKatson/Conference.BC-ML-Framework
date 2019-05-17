@@ -48,12 +48,12 @@ table 50100 "AIR RestSalesEntry"
             CaptionML = ENU = 'fest_name';
         }
 
-        field(100; "confidence"; Decimal)
+        field(98; "month"; Integer)
         {
         }
-
-
-
+        field(99; "day"; Integer)
+        {
+        }
     }
 
     keys

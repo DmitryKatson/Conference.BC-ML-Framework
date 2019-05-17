@@ -19,6 +19,16 @@ page 50100 "AIR RestSalesEntries"
                 {
                     ApplicationArea = All;
                 }
+                field("day"; "day")
+                {
+                    ApplicationArea = All;
+
+                }
+                field("month"; "month")
+                {
+                    ApplicationArea = All;
+
+                }
                 field("menu_item_id"; "menu_item_id")
                 {
                     ApplicationArea = All;
@@ -54,10 +64,6 @@ page 50100 "AIR RestSalesEntries"
                     ApplicationArea = All;
                 }
                 field("fest_name"; "fest_name")
-                {
-                    ApplicationArea = All;
-                }
-                field("confidence"; "confidence")
                 {
                     ApplicationArea = All;
                 }
