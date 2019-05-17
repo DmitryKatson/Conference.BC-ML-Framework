@@ -1,6 +1,9 @@
 table 50100 "AIR RestSalesEntry"
 {
 
+    LookupPageId = "AIR RestSalesEntries";
+    DrillDownPageId = "AIR RestSalesEntries";
+
     fields
     {
 
@@ -44,6 +47,12 @@ table 50100 "AIR RestSalesEntry"
         {
             CaptionML = ENU = 'fest_name';
         }
+
+        field(100; "confidence"; Decimal)
+        {
+        }
+
+
 
     }
 

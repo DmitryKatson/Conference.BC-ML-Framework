@@ -57,7 +57,10 @@ page 50100 "AIR RestSalesEntries"
                 {
                     ApplicationArea = All;
                 }
-
+                field("confidence"; "confidence")
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }

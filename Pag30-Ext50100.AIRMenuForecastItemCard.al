@@ -14,6 +14,20 @@ pageextension 50100 "AIR MenuForecastItemCard" extends "Item Card" //30
             {
                 Image = Forecast;
 
+                action("AIR Train ML Model")
+                {
+                    Caption = 'Create My Rest. Forecast ML Model';
+                    ToolTip = 'Send your data to our predictive experiment and we will prepare a predictive model for you.';
+                    Image = Task;
+                    ApplicationArea = All;
+                    trigger OnAction()
+                    var
+                        RestForecastTrain: Codeunit "AIR Train Rest. Forecast ML";
+                    begin
+                        RestForecastTrain.Train();
+                    end;
+                }
+
                 action("AIR UpdateForecast")
                 {
                     Caption = 'Update Rest. Forecast';
@@ -23,8 +37,16 @@ pageextension 50100 "AIR MenuForecastItemCard" extends "Item Card" //30
                     var
                         RestForecastCalculate: Codeunit "AIR Calculate Rest. Forecast";
                     begin
-                        RestForecastCalculate.CalculateRestForecast(Rec."No. 2");
+                        RestForecastCalculate.CalculateRestForecast(Rec);
                     end;
+                }
+
+                action("AIR OpenEvents")
+                {
+                    Caption = 'Open Events Schedule';
+                    Image = Calendar;
+                    ApplicationArea = All;
+                    RunObject = page "AIR MF Event Schedule List";
                 }
 
                 action("AIR OpenRestHistory")
