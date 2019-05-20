@@ -5,6 +5,7 @@ page 50101 "AIR RestForecast"
     ApplicationArea = All;
     Editable = false;
     SourceTable = "Time Series Forecast";
+    Caption = 'Restaurant AI sales forecast';
 
     layout
     {
@@ -58,6 +59,12 @@ page 50101 "AIR RestForecast"
             {
                 Caption = 'PDF Viewer';
                 ApplicationArea = All;
+            }
+            part(ItemPicture; "Item Picture")
+            {
+                Caption = 'Picture';
+                ApplicationArea = All;
+                SubPageLink = "No. 2" = field ("Group ID");
             }
 
         }
