@@ -85,11 +85,12 @@ page 50100 "AIR RestSalesEntries"
             }
             action("AIR Train ML Model")
             {
-                Caption = 'Create My Rest. Forecast ML Model';
+                Caption = 'Train';
                 ToolTip = 'Send your data to our predictive experiment and we will prepare a predictive model for you.';
                 Image = Task;
                 ApplicationArea = All;
                 Promoted = true;
+                PromotedCategory = Process;
                 trigger OnAction()
                 var
                     RestForecastTrain: Codeunit "AIR Train Rest. Forecast ML";
