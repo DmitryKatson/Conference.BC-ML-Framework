@@ -62,29 +62,6 @@ page 50101 "AIR RestForecast"
 
         }
     }
-    actions
-    {
-        area(Processing)
-        {
-            action("AIR Train ML Model")
-            {
-                Caption = 'Create My Rest. Forecast ML Model';
-                ToolTip = 'Send your data to our predictive experiment and we will prepare a predictive model for you.';
-                Image = Task;
-                ApplicationArea = All;
-                trigger OnAction()
-                var
-                    RestForecastTrain: Codeunit "AIR Train Rest. Forecast ML";
-                begin
-                    RestForecastTrain.Train();
-                    RestForecastTrain.DownloadPlotOfTheModel();
-                end;
-            }
-
-        }
-    }
-
-
 
     var
         [InDataSet]
