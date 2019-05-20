@@ -2,6 +2,13 @@ pageextension 50100 "AIR MenuForecastItemCard" extends "Item Card" //30
 {
     layout
     {
+        addafter("Item Category Code")
+        {
+            field("AIR Is Children Menu"; "AIR Is Children Menu")
+            {
+                ApplicationArea = all;
+            }
+        }
 
     }
 

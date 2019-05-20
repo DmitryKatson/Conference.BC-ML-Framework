@@ -19,17 +19,15 @@ page 50100 "AIR RestSalesEntries"
                 {
                     ApplicationArea = All;
                 }
-                field("day"; "day")
-                {
-                    ApplicationArea = All;
-
-                }
-                field("month"; "month")
-                {
-                    ApplicationArea = All;
-
-                }
                 field("menu_item_id"; "menu_item_id")
+                {
+                    ApplicationArea = All;
+                }
+                field("orders"; "orders")
+                {
+                    ApplicationArea = All;
+                }
+                field("s_go_list"; "s_go_list")
                 {
                     ApplicationArea = All;
                 }
@@ -44,10 +42,6 @@ page 50100 "AIR RestSalesEntries"
                 }
 
                 field("stock_count"; "stock_count")
-                {
-                    ApplicationArea = All;
-                }
-                field("orders"; "orders")
                 {
                     ApplicationArea = All;
                 }

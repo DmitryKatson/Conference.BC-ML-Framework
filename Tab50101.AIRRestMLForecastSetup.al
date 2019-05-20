@@ -18,6 +18,15 @@ table 50101 "AIR Rest. ML Forecast Setup"
             MinValue = 0;
             MaxValue = 1;
         }
+        field(6; "My Features"; Text[1024])
+        {
+            Editable = false;
+        }
+        field(7; "My Label"; Text[250])
+        {
+            Editable = false;
+        }
+
 
     }
 

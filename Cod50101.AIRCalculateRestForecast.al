@@ -22,15 +22,14 @@ codeunit 50101 "AIR Calculate Rest. Forecast"
         MLPrediction.SetRecord(RestSalesHistory);
 
         //Set features
-        MLPrediction.AddFeature(RestSalesHistory.FieldNo(month));
-        MLPrediction.AddFeature(RestSalesHistory.FieldNo(day));
-        MLPrediction.AddFeature(RestSalesHistory.FieldNo(stock_count));
-        MLPrediction.AddFeature(RestSalesHistory.FieldNo(menu_item_id));
+        //MLPrediction.AddFeature(RestSalesHistory.FieldNo(menu_item_id));
         MLPrediction.AddFeature(RestSalesHistory.FieldNo(in_children_menu));
         MLPrediction.AddFeature(RestSalesHistory.FieldNo(fest_name));
-        MLPrediction.AddFeature(RestSalesHistory.FieldNo(Children_Event));
-        MLPrediction.AddFeature(RestSalesHistory.FieldNo(Music_Event));
-        MLPrediction.AddFeature(RestSalesHistory.FieldNo(max_stock_quantity));
+        MLPrediction.AddFeature(RestSalesHistory.FieldNo(children_event));
+        MLPrediction.AddFeature(RestSalesHistory.FieldNo(music_Event));
+        MLPrediction.AddFeature(RestSalesHistory.FieldNo(s_month));
+        MLPrediction.AddFeature(RestSalesHistory.FieldNo(s_day));
+        MLPrediction.AddFeature(RestSalesHistory.FieldNo(s_go_list));
 
         //Set label
         MLPrediction.SetLabel(RestSalesHistory.FieldNo(orders));
@@ -46,6 +45,7 @@ codeunit 50101 "AIR Calculate Rest. Forecast"
 
         //Show forecast
         Page.Run(Page::"AIR RestForecast", TempTimeSeriesForecast);
+
     end;
 
     local procedure PrepareData(Item: Record Item; var RestSalesHistory: Record "AIR RestSalesEntry" temporary)
@@ -64,8 +64,6 @@ codeunit 50101 "AIR Calculate Rest. Forecast"
                 with RestSalesHistory do begin
                     Init();
                     date := Dates."Period Start";
-                    day := Date2DMY(Dates."Period Start", 1);
-                    month := Date2DMY(Dates."Period Start", 2);
                     stock_count := Item.GetCurrentInventory();
                     menu_item_id := Item."No. 2";
                     in_children_menu := Item."AIR Is Children Menu";
@@ -73,7 +71,8 @@ codeunit 50101 "AIR Calculate Rest. Forecast"
                     Children_Event := CheckIfChildrenEvent(Dates."Period Start");
                     Music_Event := CheckIfMusicEvent(Dates."Period Start");
                     max_stock_quantity := Item."Maximum Inventory";
-                    Insert();
+
+                    Insert(true);
                 end;
             until Dates.Next() = 0;
     end;
@@ -85,6 +84,18 @@ codeunit 50101 "AIR Calculate Rest. Forecast"
         IF Not MFEvent.Get(ForecastDate, MFEvent."Event Type"::Festival) then
             exit('NA');
         exit(MFEvent."Event Name");
+    end;
+
+    procedure CheckIfGoList(No2: Code[20]): Boolean
+    var
+        Item: Record Item;
+    begin
+        with Item do begin
+            SetRange("No. 2", No2);
+            If not FindFirst() then
+                exit(false);
+            exit(GetCurrentInventory() > "Maximum Inventory");
+        end;
     end;
 
     procedure CheckIfChildrenEvent(ForecastDate: Date): Boolean
@@ -104,6 +115,7 @@ codeunit 50101 "AIR Calculate Rest. Forecast"
             exit(false);
         exit(true);
     end;
+
 
     local procedure SaveForecastResult(var RestSalesHistory: Record "AIR RestSalesEntry" temporary; var TempTimeSeriesForecast: Record "Time Series Forecast" temporary)
     begin

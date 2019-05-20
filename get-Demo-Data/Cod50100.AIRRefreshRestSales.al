@@ -64,10 +64,7 @@ codeunit 50100 "AIR RefreshRestSales"
         restsales."Music_Event" := YesNo2Boolean(GetJsonToken(JsonObject, 'Music_Event').AsValue.AsText());
         restsales."fest_name" := jsonWithNull2Text(GetJsonToken(JsonObject, 'fest_name').AsValue());
 
-        restsales.month := Date2DMY(restsales.date, 2);
-        restsales.day := Date2DMY(restsales.date, 1);
-
-        restsales.Insert;
+        restsales.Insert(true);
     end;
 
     procedure GetJsonToken(JsonObject: JsonObject; TokenKey: text) JsonToken: JsonToken;
@@ -99,6 +96,22 @@ codeunit 50100 "AIR RefreshRestSales"
             exit('NA')
         else
             exit(someJsonValue.AsText());
+    end;
+
+    local procedure TextWithNull2Int(someText: Text): Integer
+    begin
+        if someText = 'NA' then
+            exit(0)
+        else
+            exit(1);
+    end;
+
+    local procedure Boolean2Int(someBool: Boolean): Integer
+    begin
+        if someBool = false then
+            exit(0)
+        else
+            exit(1)
     end;
 
 }

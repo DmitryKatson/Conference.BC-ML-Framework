@@ -12,8 +12,8 @@ codeunit 50110 "AIR RestForecast Install"
         if not isEvaluationCompany() then
             exit;
 
-        LoadDemoData();
-        LoadRestHistory();
+        //LoadDemoData();
+        //LoadRestHistory();
     end;
 
     local procedure EnableWebServicesCallsInTheSandbox()
