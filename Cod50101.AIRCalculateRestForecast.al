@@ -87,32 +87,6 @@ codeunit 50101 "AIR Calculate Rest. Forecast"
         exit(0);
     end;
 
-    local procedure GetFestivalName(ForecastDate: Date): Text
-    var
-        MFEvent: Record "AIR MF Event Schedule";
-    begin
-        IF Not MFEvent.Get(ForecastDate, MFEvent."Event Type"::Festival) then
-            exit('');
-        exit(MFEvent."Event Name");
-    end;
-
-    local procedure CheckIfChildrenEvent(ForecastDate: Date): Integer
-    var
-        MFEvent: Record "AIR MF Event Schedule";
-    begin
-        IF Not MFEvent.Get(ForecastDate, MFEvent."Event Type"::"Children Event") then
-            exit(0);
-        exit(1);
-    end;
-
-    local procedure CheckIfMusicEvent(ForecastDate: Date): Integer
-    var
-        MFEvent: Record "AIR MF Event Schedule";
-    begin
-        IF Not MFEvent.Get(ForecastDate, MFEvent."Event Type"::"Music Event") then
-            exit(0);
-        exit(1);
-    end;
 
     local procedure SaveForecastResult(ItemNo: Code[20]; ForecastDate: Date; PredictionValue: Decimal; var TempTimeSeriesForecast: Record "Time Series Forecast" temporary)
     begin

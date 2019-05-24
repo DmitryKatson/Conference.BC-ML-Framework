@@ -24,4 +24,32 @@ table 50111 "AIR MF Event Schedule"
         }
     }
 
+    procedure GetFestivalName(ForecastDate: Date): Text
+    var
+        MFEvent: Record "AIR MF Event Schedule";
+    begin
+        IF Not MFEvent.Get(ForecastDate, MFEvent."Event Type"::Festival) then
+            exit('');
+        exit(MFEvent."Event Name");
+    end;
+
+    procedure CheckIfChildrenEvent(ForecastDate: Date): Integer
+    var
+        MFEvent: Record "AIR MF Event Schedule";
+    begin
+        IF Not MFEvent.Get(ForecastDate, MFEvent."Event Type"::"Children Event") then
+            exit(0);
+        exit(1);
+    end;
+
+    procedure CheckIfMusicEvent(ForecastDate: Date): Integer
+    var
+        MFEvent: Record "AIR MF Event Schedule";
+    begin
+        IF Not MFEvent.Get(ForecastDate, MFEvent."Event Type"::"Music Event") then
+            exit(0);
+        exit(1);
+    end;
+
+
 }
