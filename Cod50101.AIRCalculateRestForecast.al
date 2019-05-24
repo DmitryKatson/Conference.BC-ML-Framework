@@ -52,6 +52,8 @@ codeunit 50101 "AIR Calculate Rest. Forecast"
     var
         Dates: Record Date;
         ForecastStartDate: Date;
+
+        MyEvent: Record "AIR MF Event Schedule";
     begin
         //Specify forecast start date
         ForecastStartDate := WorkDate();
@@ -67,55 +69,15 @@ codeunit 50101 "AIR Calculate Rest. Forecast"
                     stock_count := Item.GetCurrentInventory();
                     menu_item_id := Item."No. 2";
                     in_children_menu := Item."AIR Is Children Menu";
-                    fest_name := GetFestivalName(Dates."Period Start");
-                    Children_Event := CheckIfChildrenEvent(Dates."Period Start");
-                    Music_Event := CheckIfMusicEvent(Dates."Period Start");
+                    fest_name := MyEvent.GetFestivalName(Dates."Period Start");
+                    Children_Event := MyEvent.CheckIfChildrenEvent(Dates."Period Start");
+                    Music_Event := MyEvent.CheckIfMusicEvent(Dates."Period Start");
                     max_stock_quantity := Item."Maximum Inventory";
 
                     Insert(true);
                 end;
             until Dates.Next() = 0;
     end;
-
-    procedure GetFestivalName(ForecastDate: Date): Text
-    var
-        MFEvent: Record "AIR MF Event Schedule";
-    begin
-        IF Not MFEvent.Get(ForecastDate, MFEvent."Event Type"::Festival) then
-            exit('NA');
-        exit(MFEvent."Event Name");
-    end;
-
-    procedure CheckIfGoList(No2: Code[20]): Boolean
-    var
-        Item: Record Item;
-    begin
-        with Item do begin
-            SetRange("No. 2", No2);
-            If not FindFirst() then
-                exit(false);
-            exit(GetCurrentInventory() > "Maximum Inventory");
-        end;
-    end;
-
-    procedure CheckIfChildrenEvent(ForecastDate: Date): Boolean
-    var
-        MFEvent: Record "AIR MF Event Schedule";
-    begin
-        IF Not MFEvent.Get(ForecastDate, MFEvent."Event Type"::"Children Event") then
-            exit(false);
-        exit(true);
-    end;
-
-    procedure CheckIfMusicEvent(ForecastDate: Date): Boolean
-    var
-        MFEvent: Record "AIR MF Event Schedule";
-    begin
-        IF Not MFEvent.Get(ForecastDate, MFEvent."Event Type"::"Music Event") then
-            exit(false);
-        exit(true);
-    end;
-
 
     local procedure SaveForecastResult(var RestSalesHistory: Record "AIR RestSalesEntry" temporary; var TempTimeSeriesForecast: Record "Time Series Forecast" temporary)
     begin
