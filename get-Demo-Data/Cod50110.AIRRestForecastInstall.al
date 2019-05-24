@@ -4,7 +4,6 @@ codeunit 50110 "AIR RestForecast Install"
 
     trigger OnInstallAppPerDatabase()
     begin
-        EnableWebServicesCallsInTheSandbox();
     end;
 
     trigger OnInstallAppPerCompany()
@@ -12,6 +11,7 @@ codeunit 50110 "AIR RestForecast Install"
         if not isEvaluationCompany() then
             exit;
 
+        EnableWebServicesCallsInTheSandbox();
         LoadDemoData();
     end;
 

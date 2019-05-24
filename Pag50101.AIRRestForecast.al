@@ -26,14 +26,56 @@ page 50101 "AIR RestForecast"
                 }
                 field("Delta %"; "Delta %")
                 {
-                    ApplicationArea = all;
+                    //ApplicationArea = all;
                 }
                 field("Delta"; "Delta")
                 {
-                    ApplicationArea = all;
+                    //ApplicationArea = all;
+                }
+                field("Go_List"; "IsGoList")
+                {
+                    ApplicationArea = All;
+                }
+                field("Children_Event"; "IsChildrenEvent")
+                {
+                    ApplicationArea = All;
+                }
+                field("Music_Event"; "IsMusic_Event")
+                {
+                    ApplicationArea = All;
+                }
+                field("fest_name"; "FestName")
+                {
+                    ApplicationArea = All;
                 }
 
             }
         }
+        area(FactBoxes)
+        {
+            part(ItemPicture; "Item Picture")
+            {
+                Caption = 'Picture';
+                ApplicationArea = All;
+                SubPageLink = "No. 2" = field ("Group ID");
+            }
+        }
     }
+    var
+        [InDataSet]
+        IsGoList: Boolean;
+        IsChildrenEvent: Boolean;
+        IsMusic_Event: Boolean;
+        FestName: Text;
+
+    trigger OnAfterGetRecord()
+    var
+        MyEvents: Record "AIR MF Event Schedule";
+        Item: Record Item;
+    begin
+        IsGoList := Item.CheckIfGoList("Group ID");
+        IsChildrenEvent := MyEvents.CheckIfChildrenEventBool("Period Start Date");
+        IsMusic_Event := MyEvents.CheckIfMusicEventBool("Period Start Date");
+        FestName := MyEvents.GetFestivalName("Period Start Date");
+    end;
 }

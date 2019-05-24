@@ -42,6 +42,15 @@ table 50111 "AIR MF Event Schedule"
         exit(1);
     end;
 
+    procedure CheckIfChildrenEventBool(ForecastDate: Date): Boolean
+    var
+        MFEvent: Record "AIR MF Event Schedule";
+    begin
+        IF Not MFEvent.Get(ForecastDate, MFEvent."Event Type"::"Children Event") then
+            exit(false);
+        exit(true);
+    end;
+
     procedure CheckIfMusicEvent(ForecastDate: Date): Integer
     var
         MFEvent: Record "AIR MF Event Schedule";
@@ -50,6 +59,17 @@ table 50111 "AIR MF Event Schedule"
             exit(0);
         exit(1);
     end;
+
+    procedure CheckIfMusicEventBool(ForecastDate: Date): Boolean
+    var
+        MFEvent: Record "AIR MF Event Schedule";
+    begin
+        IF Not MFEvent.Get(ForecastDate, MFEvent."Event Type"::"Music Event") then
+            exit(false);
+        exit(true);
+    end;
+
+
 
 
 }

@@ -57,7 +57,8 @@ codeunit 50102 "AIR Rest. Load Demo Data"
     var
         Item: Record Item;
     begin
-        DeleteItemIfAlreadyEsist(ExternalID);
+        IF CheckIfItemIsAlreadyExist(ExternalID) then
+            exit;
 
         with Item do begin
             Init();
@@ -70,7 +71,6 @@ codeunit 50102 "AIR Rest. Load Demo Data"
             Validate("Base Unit of Measure", 'Pack');
             Validate("Gen. Prod. Posting Group", 'RETAIL');
             Validate("Inventory Posting Group", 'RESALE');
-
             Validate("AIR Is Children Menu", IsChildrenMenu);
 
             UploadItemPicture(Item);
@@ -80,12 +80,12 @@ codeunit 50102 "AIR Rest. Load Demo Data"
 
     end;
 
-    local procedure DeleteItemIfAlreadyEsist(ExternalID: Code[20]);
+    local procedure CheckIfItemIsAlreadyExist(ExternalID: Code[20]): Boolean;
     var
         Item: Record Item;
     begin
         Item.SetRange("No. 2", ExternalID);
-        Item.DeleteAll(true);
+        Exit(not Item.IsEmpty);
     end;
 
     local procedure UploadItemPicture(var Item: Record Item)

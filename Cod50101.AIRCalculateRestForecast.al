@@ -5,6 +5,7 @@ codeunit 50101 "AIR Calculate Rest. Forecast"
     var
         Date: Record Date;
         ForecastStartDate: Date;
+        MyEvent: Record "AIR MF Event Schedule";
         RowNo: Integer;
 
         AzureMLConnector: Codeunit "Azure ML Connector";
@@ -48,10 +49,10 @@ codeunit 50101 "AIR Calculate Rest. Forecast"
                 AzureMLConnector.AddInputValue(Format(Date."Period Start"));
                 AzureMLConnector.AddInputValue(Format(Item.GetCurrentInventory));
                 AzureMLConnector.AddInputValue(Item."No. 2");
-                AzureMLConnector.AddInputValue(Format(CheckIfItemMenuBelongsToChildrenMenu(Item)));
-                AzureMLConnector.AddInputValue(GetFestivalName(Date."Period Start"));
-                AzureMLConnector.AddInputValue(Format(CheckIfChildrenEvent(Date."Period Start")));
-                AzureMLConnector.AddInputValue(Format(CheckIfMusicEvent(Date."Period Start")));
+                AzureMLConnector.AddInputValue(Format(Item.CheckIfItemMenuBelongsToChildrenMenu(Item)));
+                AzureMLConnector.AddInputValue(MyEvent.GetFestivalName(Date."Period Start"));
+                AzureMLConnector.AddInputValue(Format(MyEvent.CheckIfChildrenEvent(Date."Period Start")));
+                AzureMLConnector.AddInputValue(Format(MyEvent.CheckIfMusicEvent(Date."Period Start")));
                 AzureMLConnector.AddInputValue(Format(Item."Maximum Inventory"));
                 // repeat the same for all columns in the API input schema
 
@@ -63,7 +64,7 @@ codeunit 50101 "AIR Calculate Rest. Forecast"
 
                 //Save forecast
                 Evaluate(PredictionValue, PredictionOrders);
-                SaveForecastResult(Item."No.", Date."Period Start", PredictionValue, TempTimeSeriesForecast);
+                SaveForecastResult(Item."No. 2", Date."Period Start", PredictionValue, TempTimeSeriesForecast);
             until Date.Next() = 0;
 
         //Show forecast
@@ -78,13 +79,6 @@ codeunit 50101 "AIR Calculate Rest. Forecast"
     local procedure getMLKey(): Text
     begin
         exit('M6iIWjDURzjzXKBmiG17fUBK2Nj1wy5DBOdN216Xr9idualQX8hINsnCXt0cdhQoUpUerixbG6IHDwPltZrJbQ==')
-    end;
-
-    local procedure CheckIfItemMenuBelongsToChildrenMenu(Item: Record Item): Integer
-    begin
-        if Item."AIR Is Children Menu" then
-            exit(1);
-        exit(0);
     end;
 
 
