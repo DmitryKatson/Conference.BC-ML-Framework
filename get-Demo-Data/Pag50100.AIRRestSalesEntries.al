@@ -81,5 +81,18 @@ page 50100 "AIR RestSalesEntries"
                 end;
             }
         }
+        area(Navigation)
+        {
+            action("Items")
+            {
+                Promoted = true;
+                PromotedCategory = Report;
+                Image = Item;
+                ApplicationArea = All;
+                PromotedIsBig = true;
+                PromotedOnly = true;
+                RunObject = page "Item List";
+            }
+        }
     }
 }
