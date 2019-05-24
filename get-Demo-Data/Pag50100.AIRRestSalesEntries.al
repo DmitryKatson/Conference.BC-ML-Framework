@@ -86,7 +86,7 @@ page 50100 "AIR RestSalesEntries"
             action("Items")
             {
                 Promoted = true;
-                PromotedCategory = Report;
+                PromotedCategory = Process;
                 Image = Item;
                 ApplicationArea = All;
                 PromotedIsBig = true;

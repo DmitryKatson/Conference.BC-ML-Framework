@@ -58,4 +58,5 @@ codeunit 50110 "AIR RestForecast Install"
 
         Refreshrestsales.Refresh();
     end;
+
 }
