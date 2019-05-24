@@ -42,9 +42,9 @@ codeunit 50110 "AIR RestForecast Install"
 
     local procedure LoadDemoData()
     var
-        MFLoadDemoData: Codeunit "AIR Rest. Load Demo Data";
+        LoadDemoData: Codeunit "AIR Rest. Load Demo Data";
     begin
-        MFLoadDemoData.LoadDemoData();
+        LoadDemoData.LoadDemoData();
     end;
 
     local procedure LoadRestHistory()

@@ -13,6 +13,7 @@ pageextension 50100 "AIR MenuForecastItemCard" extends "Item Card" //30
             group("AIR Restaurant")
             {
                 Image = Forecast;
+                Caption = 'Restaurant';
 
                 action("AIR UpdateForecast")
                 {

@@ -48,7 +48,8 @@ codeunit 50102 "AIR Rest. Load Demo Data"
     var
         Item: Record Item;
     begin
-        DeleteItemIfAlreadyEsist(ExternalID);
+        IF Not TryToDeleteItemIfAlreadyEsist(ExternalID) Then
+            Exit;
 
         with Item do begin
             Init();
@@ -68,12 +69,20 @@ codeunit 50102 "AIR Rest. Load Demo Data"
 
     end;
 
-    local procedure DeleteItemIfAlreadyEsist(ExternalID: Code[20]);
+    local procedure TryToDeleteItemIfAlreadyEsist(ExternalID: Code[20]): Boolean;
     var
         Item: Record Item;
     begin
         Item.SetRange("No. 2", ExternalID);
-        Item.DeleteAll(true);
+        If not Item.FindFirst() then
+            exit(false);
+
+        repeat
+            If Not Item.Delete(true) then
+                exit(false);
+        until item.Next() = 0;
+
+        exit(true);
     end;
 
     local procedure UploadItemPicture(var Item: Record Item)
