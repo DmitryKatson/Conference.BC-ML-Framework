@@ -1,3 +1,4 @@
 *.app
-**/rad.json
 **/launch.json
+**/*.g.xlf
+**/*.rad
