@@ -45,6 +45,14 @@ codeunit 50102 "AIR Rest. Load Demo Data"
 
         DeleteAllEvents();
 
+        InsertEvent(CalcDate('<3D>', 20180923D), 1, '');
+        InsertEvent(CalcDate('<2D>', 20180923D), 2, '');
+        InsertEvent(CalcDate('<5D>', 20180923D), 3, 'City Lights');
+        InsertEvent(CalcDate('<6D>', 20180923D), 3, 'The V Festival');
+        InsertEvent(CalcDate('<7D>', 20180923D), 3, 'Wirless Festival');
+        InsertEvent(CalcDate('<7D>', 20180923D), 2, '');
+
+
         InsertEvent(CalcDate('<3D>', WorkDate()), 1, '');
         InsertEvent(CalcDate('<2D>', WorkDate()), 2, '');
         InsertEvent(CalcDate('<5D>', WorkDate()), 3, 'City Lights');
@@ -57,7 +65,8 @@ codeunit 50102 "AIR Rest. Load Demo Data"
     var
         Item: Record Item;
     begin
-        DeleteItemIfAlreadyEsist(ExternalID);
+        IF CheckIfItemIsAlreadyExist(ExternalID) then
+            exit;
 
         with Item do begin
             Init();
@@ -70,7 +79,6 @@ codeunit 50102 "AIR Rest. Load Demo Data"
             Validate("Base Unit of Measure", 'Pack');
             Validate("Gen. Prod. Posting Group", 'RETAIL');
             Validate("Inventory Posting Group", 'RESALE');
-
             Validate("AIR Is Children Menu", IsChildrenMenu);
 
             UploadItemPicture(Item);
@@ -80,18 +88,12 @@ codeunit 50102 "AIR Rest. Load Demo Data"
 
     end;
 
-    local procedure DeleteItemIfAlreadyEsist(ExternalID: Code[20]);
+    local procedure CheckIfItemIsAlreadyExist(ExternalID: Code[20]): Boolean;
     var
         Item: Record Item;
     begin
         Item.SetRange("No. 2", ExternalID);
-        if not Item.FindFirst() then
-            exit;
-
-        If item.ExistsItemLedgerEntry() then
-            exit;
-
-        Item.DeleteAll(true);
+        Exit(not Item.IsEmpty);
     end;
 
     local procedure UploadItemPicture(var Item: Record Item)

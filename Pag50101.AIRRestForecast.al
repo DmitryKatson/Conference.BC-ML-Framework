@@ -79,12 +79,13 @@ page 50101 "AIR RestForecast"
 
     trigger OnAfterGetRecord()
     var
-        CalcRestSales: Codeunit "AIR Calculate Rest. Forecast";
+        MyEvents: Record "AIR MF Event Schedule";
+        Item: Record Item;
     begin
-        IsGoList := CalcRestSales.CheckIfGoList("Group ID");
-        IsChildrenEvent := CalcRestSales.CheckIfChildrenEvent("Period Start Date");
-        IsMusic_Event := CalcRestSales.CheckIfMusicEvent("Period Start Date");
-        FestName := CalcRestSales.GetFestivalName("Period Start Date");
+        IsGoList := Item.CheckIfGoList("Group ID");
+        IsChildrenEvent := MyEvents.CheckIfChildrenEvent("Period Start Date");
+        IsMusic_Event := MyEvents.CheckIfMusicEvent("Period Start Date");
+        FestName := MyEvents.GetFestivalName("Period Start Date");
         ShowPdfInViewer();
     end;
 

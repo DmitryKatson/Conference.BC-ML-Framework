@@ -20,6 +20,7 @@ pageextension 50100 "AIR MenuForecastItemCard" extends "Item Card" //30
             group("AIR Restaurant")
             {
                 Image = Forecast;
+                Caption = 'Restaurant';
 
                 action("AIR Train ML Model")
                 {
@@ -40,6 +41,9 @@ pageextension 50100 "AIR MenuForecastItemCard" extends "Item Card" //30
                     Caption = 'Update Rest. Forecast';
                     Image = Forecast;
                     ApplicationArea = All;
+                    Promoted = true;
+                    PromotedCategory = Process;
+
                     trigger OnAction()
                     var
                         RestForecastCalculate: Codeunit "AIR Calculate Rest. Forecast";
@@ -53,6 +57,8 @@ pageextension 50100 "AIR MenuForecastItemCard" extends "Item Card" //30
                     Caption = 'Open Events Schedule';
                     Image = Calendar;
                     ApplicationArea = All;
+                    Promoted = true;
+                    PromotedCategory = Process;
                     RunObject = page "AIR MF Event Schedule List";
                 }
 
@@ -61,6 +67,9 @@ pageextension 50100 "AIR MenuForecastItemCard" extends "Item Card" //30
                     Caption = 'Open Rest. History';
                     Image = History;
                     ApplicationArea = All;
+                    Promoted = true;
+                    PromotedCategory = Process;
+
                     trigger OnAction()
                     var
                         RestSalesHistory: Record "AIR RestSalesEntry";

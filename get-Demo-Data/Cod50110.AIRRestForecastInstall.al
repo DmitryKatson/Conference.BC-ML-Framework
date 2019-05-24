@@ -4,7 +4,7 @@ codeunit 50110 "AIR RestForecast Install"
 
     trigger OnInstallAppPerDatabase()
     begin
-        EnableWebServicesCallsInTheSandbox();
+        //EnableWebServicesCallsInTheSandbox();
     end;
 
     trigger OnInstallAppPerCompany()
@@ -12,8 +12,9 @@ codeunit 50110 "AIR RestForecast Install"
         if not isEvaluationCompany() then
             exit;
 
-        //LoadDemoData();
-        //LoadRestHistory();
+        EnableWebServicesCallsInTheSandbox();
+        LoadDemoData();
+        LoadRestHistory();
     end;
 
     local procedure EnableWebServicesCallsInTheSandbox()
@@ -42,9 +43,9 @@ codeunit 50110 "AIR RestForecast Install"
 
     local procedure LoadDemoData()
     var
-        MFLoadDemoData: Codeunit "AIR Rest. Load Demo Data";
+        LoadDemoData: Codeunit "AIR Rest. Load Demo Data";
     begin
-        MFLoadDemoData.LoadDemoData();
+        LoadDemoData.LoadDemoData();
     end;
 
     local procedure LoadRestHistory()
@@ -57,4 +58,5 @@ codeunit 50110 "AIR RestForecast Install"
 
         Refreshrestsales.Refresh();
     end;
+
 }
