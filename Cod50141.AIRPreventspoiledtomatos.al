@@ -48,7 +48,7 @@ codeunit 50141 "AIR Prevent spoiled tomatos"
 
     local procedure GetCustomVisionUri(): Text
     begin
-        exit('https://westeurope.api.cognitive.microsoft.com/customvision/v3.0/Prediction/85f84c77-3a6a-40fb-85f8-9022282ad7d2/classify/iterations/Iteration1/image')
+        exit('https://westeurope.api.cognitive.microsoft.com/customvision/v3.0/Prediction/3913a53c-04bc-41ea-9f53-a837a84b622e/classify/iterations/Iteration1/image')
     end;
 
     local procedure GetCustomVisionKey(): Text
