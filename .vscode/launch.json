@@ -5,14 +5,16 @@
             "type": "al",
             "request": "launch",
             "name": "Your own server",
-            "server": "http://dok-us",
-            "serverInstance": "NAV",
+            "server": "http://DirEMEA-Wave2",
+            "serverInstance": "BC",
             "authentication": "UserPassword",
             "breakOnError": true,
             "launchBrowser": true,
             "startupObjectId": 50100,
             "startupObjectType": "Page",
-            "schemaUpdateMode": "ForceSync"
+            "schemaUpdateMode": "ForceSync",
+            "enableLongRunningSqlStatements": true,
+            "enableSqlInformationDebugger": true
         }
     ]
 }
