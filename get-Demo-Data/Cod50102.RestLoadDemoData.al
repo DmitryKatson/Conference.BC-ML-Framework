@@ -42,6 +42,8 @@ codeunit 50102 "AIR Rest. Load Demo Data"
         InsertMenuItem('3 ', 'Boiled potatoes', false, 172, false);
         InsertMenuItem('2 ', 'Boiled eggs', false, 113, false);
         InsertMenuItem('17', 'Orange marmalade', false, 70, false);
+        InsertMenuItem('35', 'fresh apple', false, 100, false);
+
     end;
 
     local procedure InsertMenuItem(ExternalID: Code[20]; Name: Text[250]; IsChildrenMenu: Boolean; MaxQtyOnStock: Decimal; PostDemoEntries: Boolean)
@@ -168,6 +170,9 @@ codeunit 50102 "AIR Rest. Load Demo Data"
                 exit('https://images8.alphacoders.com/387/387276.jpg');
             '34':
                 exit('http://www.misskitchenwitch.com/blog/wp-content/uploads/2013/08/RicePudding1.jpg');
+            '35':
+                exit('https://cstor.nn2.ru/userfiles/data/ufiles/2017-04/5c/40/f9/5901e6aa33e5d_yabloko_aromatizator_dlya_svechey_10_ml_-_45._v_nalichii_8_sht.jpg');
+
         End;
     end;
 }
