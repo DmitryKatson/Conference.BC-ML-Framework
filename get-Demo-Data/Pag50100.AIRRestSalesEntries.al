@@ -99,6 +99,23 @@ page 50100 "AIR RestSalesEntries"
                     RestForecastTrain.DownloadPlotOfTheModel();
                 end;
             }
+
+            action("AIR Fix problem")
+            {
+                Caption = 'Fix problem';
+                ToolTip = 'Fill the blank values with N/A';
+                Image = Task;
+                Promoted = true;
+                ApplicationArea = All;
+                PromotedCategory = Process;
+                trigger OnAction()
+                var
+                    RestSalesHistory: Record "AIR RestSalesEntry";
+                begin
+                    RestSalesHistory.AddSomeTextValueToBlankFields();
+                    CurrPage.Update();
+                end;
+            }
         }
         area(Navigation)
         {

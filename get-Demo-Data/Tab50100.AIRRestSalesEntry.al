@@ -80,6 +80,19 @@ table 50100 "AIR RestSalesEntry"
         Refreshrestsales.Refresh();
     end;
 
+    procedure AddSomeTextValueToBlankFields()
+    begin
+        if not FindSet() then
+            exit;
+
+        repeat
+            if fest_name = '' then
+                fest_name := 'NA';
+            calcSystemFields();
+            Modify();
+        until Next() = 0;
+    end;
+
     local procedure calcSystemFields()
     begin
         s_month := Date2DMY(date, 2);
