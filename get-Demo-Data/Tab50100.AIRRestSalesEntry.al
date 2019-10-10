@@ -44,6 +44,17 @@ table 50100 "AIR RestSalesEntry"
         {
             CaptionML = ENU = 'fest_name';
         }
+        field(98; "s_month"; Integer)
+        {
+        }
+        field(99; "s_day"; Integer)
+        {
+        }
+
+        field(100; "s_go_list"; Boolean)
+        {
+
+        }
 
     }
 
@@ -55,6 +66,11 @@ table 50100 "AIR RestSalesEntry"
         }
     }
 
+    trigger OnInsert()
+    begin
+        CalcSystemFields();
+    end;
+
     procedure RefreshRestSales();
     var
         Refreshrestsales: Codeunit "AIR RefreshRestSales";
@@ -62,5 +78,10 @@ table 50100 "AIR RestSalesEntry"
         Refreshrestsales.Refresh();
     end;
 
-
+    local procedure calcSystemFields()
+    begin
+        s_month := Date2DMY(date, 2);
+        s_day := Date2DMY(date, 1);
+        s_go_list := stock_count > max_stock_quantity
+    end;
 }
