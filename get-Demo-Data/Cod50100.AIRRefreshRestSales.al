@@ -64,7 +64,7 @@ codeunit 50100 "AIR RefreshRestSales"
         restsales."Music_Event" := YesNo2Boolean(GetJsonToken(JsonObject, 'Music_Event').AsValue.AsText());
         restsales."fest_name" := jsonWithNull2Text(GetJsonToken(JsonObject, 'fest_name').AsValue());
 
-        restsales.Insert;
+        restsales.Insert(true);
     end;
 
     procedure GetJsonToken(JsonObject: JsonObject; TokenKey: text) JsonToken: JsonToken;
