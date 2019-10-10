@@ -82,15 +82,8 @@ table 50100 "AIR RestSalesEntry"
 
     procedure AddSomeTextValueToBlankFields()
     begin
-        if not FindSet() then
-            exit;
-
-        repeat
-            if fest_name = '' then
-                fest_name := 'NA';
-            calcSystemFields();
-            Modify();
-        until Next() = 0;
+        setfilter(fest_name, '''''');
+        ModifyAll(fest_name, 'NA');
     end;
 
     local procedure calcSystemFields()
