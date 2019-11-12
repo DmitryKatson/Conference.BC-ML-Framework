@@ -18,7 +18,7 @@
             "type": "al",
             "request": "launch",
             "name": "Your own server",
-            "server": "http://DirEMEA-Wave2",
+            "server": "http://NTDWorkshop",
             "serverInstance": "BC",
             "authentication": "UserPassword",
             "breakOnError": true,

@@ -22,7 +22,7 @@ codeunit 50101 "AIR CustomVision"
 
     local procedure GetCustomVisionUri(): Text
     begin
-        exit('https://westeurope.api.cognitive.microsoft.com/customvision/v3.0/Prediction/1d06bd25-041f-439b-9d19-ddb38d35a7e9/classify/iterations/main/image')
+        exit('https://westeurope.api.cognitive.microsoft.com/customvision/v3.0/Prediction/3913a53c-04bc-41ea-9f53-a837a84b622e/classify/iterations/Iteration1/image')
     end;
 
     local procedure GetCustomVisionKey(): Text
@@ -32,7 +32,7 @@ codeunit 50101 "AIR CustomVision"
 
     local procedure GetSpoiledTagName(): Text
     begin
-        exit('spoiled');
+        exit('Spoiled Tomato');
     end;
 
     local procedure GetMinSpoiledProbability(): Decimal
