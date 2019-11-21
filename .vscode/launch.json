@@ -2,8 +2,8 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "DirectionsEMEA cloud sandbox",
-            "sandboxName": "DirectionsEMEA",
+            "name": "NavTechDays cloud sandbox",
+            "sandboxName": "ntd",
             "type": "al",
             "request": "launch",
             "breakOnError": true,
